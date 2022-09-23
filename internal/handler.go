@@ -16,6 +16,10 @@ func (agent *Agent) OnReportMonitor() {
 }
 
 func (agent *Agent) OnMessage(msg *anet.Msg) error {
+	switch msg.Type {
+	case anet.TypeExec:
+		return agent.Run(msg)
+	}
 	return nil
 }
 

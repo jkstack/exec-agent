@@ -1,13 +1,16 @@
 module exec
 
-go 1.17
+go 1.18
 
 replace github.com/kardianos/service => github.com/lwch/service v1.2.1-1
 
 require (
-	github.com/jkstack/anet v0.0.0-20220914031259-662a503d0cb1
+	github.com/creack/pty v1.1.18
+	github.com/dustin/go-humanize v1.0.0
+	github.com/jkstack/anet v0.0.0-20220922035122-ad0fdf329f13
 	github.com/jkstack/jkframe v1.0.8
 	github.com/jkstack/libagent v1.1.3
+	golang.org/x/text v0.3.6
 )
 
 require (
@@ -16,7 +19,6 @@ require (
 	github.com/containerd/cgroups v1.0.4 // indirect
 	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
-	github.com/dustin/go-humanize v1.0.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
