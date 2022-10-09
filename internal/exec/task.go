@@ -90,6 +90,7 @@ func (t *Task) Start(timeout time.Duration) error {
 	}
 	if t.cmd.Process != nil {
 		t.pid = t.cmd.Process.Pid
+		logging.Info("start process for task [%s] success, pid=%d", t.ID, t.pid)
 	}
 	go func() {
 		select {
@@ -163,8 +164,5 @@ func (t *Task) Response(ch chan *anet.Msg, cancel context.CancelFunc) {
 }
 
 func (t *Task) Pid() int {
-	if t.cmd != nil && t.cmd.Process != nil {
-		return t.cmd.Process.Pid
-	}
-	return -1
+	return t.pid
 }

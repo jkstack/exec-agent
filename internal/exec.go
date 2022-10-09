@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/jkstack/anet"
+	"github.com/jkstack/jkframe/logging"
 )
 
 func (agent *Agent) Run(msg *anet.Msg) error {
@@ -21,10 +22,22 @@ func (agent *Agent) Run(msg *anet.Msg) error {
 		return err
 	}
 	agent.execOK(task)
+
+	agent.Lock()
+	agent.tasks[task.Pid()] = task
+	agent.Unlock()
+
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	go task.Response(agent.chWrite, cancel)
-	go task.Wait(ctx, agent.chWrite)
+	go func() {
+		task.Wait(ctx, agent.chWrite)
+		task.Close()
+
+		agent.Lock()
+		delete(agent.tasks, task.Pid())
+		agent.Unlock()
+	}()
 	return nil
 }
 
@@ -51,4 +64,17 @@ func (agent *Agent) execOK(task *exec.Task) {
 		Time: task.Begin,
 	}
 	agent.chWrite <- &msg
+}
+
+func (agent *Agent) Kill(pid int) error {
+	agent.RLock()
+	task := agent.tasks[pid]
+	agent.RUnlock()
+	if task == nil {
+		logging.Warning("process of %d not found", pid)
+		return nil
+	}
+	logging.Info("kill for task [%s], pid=%d", task.ID, pid)
+	task.Close()
+	return nil
 }

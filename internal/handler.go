@@ -19,6 +19,8 @@ func (agent *Agent) OnMessage(msg *anet.Msg) error {
 	switch msg.Type {
 	case anet.TypeExec:
 		return agent.Run(msg)
+	case anet.TypeExecKill:
+		return agent.Kill(msg.ExecKill.Pid)
 	}
 	return nil
 }
