@@ -23,6 +23,8 @@ func (agent *Agent) OnMessage(msg *anet.Msg) error {
 		return agent.Kill(msg.ExecKill.Pid)
 	case anet.TypeLsReq:
 		return agent.Ls(msg.TaskID, msg.LSReq.Dir)
+	case anet.TypeDownloadReq:
+		return agent.Download(msg.TaskID, msg.DownloadReq.Dir)
 	}
 	return nil
 }
