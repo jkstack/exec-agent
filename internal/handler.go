@@ -21,6 +21,8 @@ func (agent *Agent) OnMessage(msg *anet.Msg) error {
 		return agent.Run(msg)
 	case anet.TypeExecKill:
 		return agent.Kill(msg.ExecKill.Pid)
+	case anet.TypeLsReq:
+		return agent.Ls(msg.TaskID, msg.LSReq.Dir)
 	}
 	return nil
 }
