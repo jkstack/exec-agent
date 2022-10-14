@@ -151,8 +151,8 @@ github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/jkstack/anet v0.0.0-20221010100306-9a88844af68f h1:zx0Vi2pWjWj608sPk0z2U3HPMDOypmv2xO3Dzkv6sw0=
 github.com/jkstack/anet v0.0.0-20221010100306-9a88844af68f/go.mod h1:L9J4lHwDxTsCPX5MNaVa/0UG36JIiDWIJxlp3jmCQxQ=
-github.com/jkstack/jkframe v1.0.9 h1:T1bqyi7SzNEY1tH1vrwGSYXlEKS2lAWToNUa6FFTMVI=
-github.com/jkstack/jkframe v1.0.9/go.mod h1:Nvs/TgkQD3OA324+ljCzBlfhd1tvCxhESBXywRB9l/c=
+github.com/jkstack/jkframe v1.1.0 h1:lESI0hv5d2TYOIJTSj1iWTMBU+zMz8tt1MZQsTgj1ic=
+github.com/jkstack/jkframe v1.1.0/go.mod h1:MZkw5MxItS4meSjYPNEi1J296dTCzVh1Erlgfhb3AZo=
 github.com/jkstack/libagent v1.1.4 h1:8yomRgU+vb7t96X4eDyjv2pOB1F4QeTQS0cx7/BSSyE=
 github.com/jkstack/libagent v1.1.4/go.mod h1:sYXnFLiopmahS3rLlO5J50CWgpqfoj45pN6vgTc7Mo4=
 github.com/jpillora/backoff v1.0.0/go.mod h1:J/6gKK9jxlEcS3zixgDgUAsiuZ7yrSoa/FX5e0EB2j4=
@@ -166,6 +166,8 @@ github.com/julienschmidt/httprouter v1.2.0/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7V
 github.com/julienschmidt/httprouter v1.3.0/go.mod h1:JR6WtHb+2LUe8TCKY3cZOxFyyO8IZAc4RVcycCCAKdM=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
+github.com/klauspost/compress v1.15.11 h1:Lcadnb3RKGin4FYM/orgq0qde+nc15E5Cbqg4B9Sx9c=
+github.com/klauspost/compress v1.15.11/go.mod h1:QPwzmACJjUTFsnSHH934V6woptycfrDDJnH7hvFVbGM=
 github.com/konsorten/go-windows-terminal-sequences v1.0.1/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/konsorten/go-windows-terminal-sequences v1.0.3/go.mod h1:T0+1ngSBFLxvqU3pZ+m/2kptfBszLMUkC4ZK/EgS/cQ=
 github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515/go.mod h1:+0opPa2QZZtGFBFZlji/RkVcI2GknAs/DXo4wKdlNEc=

@@ -3,9 +3,9 @@ package internal
 import (
 	"crypto/md5"
 	"exec/internal/file"
-	"exec/internal/utils"
 
 	"github.com/jkstack/anet"
+	"github.com/jkstack/jkframe/compress"
 	"github.com/jkstack/jkframe/logging"
 )
 
@@ -75,7 +75,7 @@ func (agent *Agent) downloadData(taskID string, offset uint64, data []byte) {
 	msg.TaskID = taskID
 	msg.DownloadData = &anet.DownloadData{
 		Offset: offset,
-		Data:   utils.EncodeData(data),
+		Data:   compress.Compress(data),
 	}
 	agent.chWrite <- &msg
 }

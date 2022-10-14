@@ -8,7 +8,7 @@ require (
 	github.com/creack/pty v1.1.18
 	github.com/dustin/go-humanize v1.0.0
 	github.com/jkstack/anet v0.0.0-20221010100306-9a88844af68f
-	github.com/jkstack/jkframe v1.0.9
+	github.com/jkstack/jkframe v1.1.0
 	github.com/jkstack/libagent v1.1.4
 	github.com/shirou/gopsutil/v3 v3.22.9
 	golang.org/x/text v0.3.8
@@ -25,6 +25,7 @@ require (
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/kardianos/service v1.2.1 // indirect
+	github.com/klauspost/compress v1.15.11 // indirect
 	github.com/lufia/plan9stats v0.0.0-20220913051719-115f729f3c8c // indirect
 	github.com/opencontainers/runtime-spec v1.0.2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20220216144756-c35f1ee13d7c // indirect
