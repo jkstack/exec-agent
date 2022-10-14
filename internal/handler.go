@@ -25,6 +25,8 @@ func (agent *Agent) OnMessage(msg *anet.Msg) error {
 		return agent.Ls(msg.TaskID, msg.LSReq.Dir)
 	case anet.TypeDownloadReq:
 		return agent.Download(msg.TaskID, msg.DownloadReq.Dir)
+	case anet.TypeUpload:
+		return agent.Upload(msg.TaskID, msg)
 	}
 	return nil
 }
