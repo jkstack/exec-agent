@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+
+  <Product Name='exec-agent' Id='ABCDDCBA-86C7-4D14-AEC0-86416A69ABDE' UpgradeCode='ABCDDCBA-7349-453F-94F6-BCB5110BA4FD'
+    Language='1033' Codepage='1252' Version='$(var.PRODUCT_VERSION)' Manufacturer='jkstack'>
+
+    <Package Id='*' Keywords='Installer' Description="jkstack metrics agent"
+      Comments='jkstack metrics agent' Manufacturer='jkstack'
+      InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252' />
+
+    <Media Id='1' Cabinet='Sample.cab' EmbedCab='yes' DiskPrompt="CD-ROM #1" />
+    <Property Id='DiskPrompt' Value="metrics agent installer" />
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Directory Id='ProgramFilesFolder'>
+        <Directory Id='exec-agent' Name='exec-agent'>
+
+            <Directory Id='INSTALLDIR' Name='InstallDir'>
+              <Directory Id='bin' Name='bin'>
+                <Component Id='MainExecutable' Guid='ABCDDCBA-83F1-4F22-985B-FDB3C8ABD471'>
+                  <File Id='exec-agent.exe' Name='exec-agent.exe' DiskId='1' Source='$(var.RELEASE_DIR)/bin/exec-agent.exe' KeyPath='yes'/>
+                  <ServiceInstall
+                    Id="ServiceInstaller"
+                    Type="ownProcess"
+                    Name="exec-agent"
+                    DisplayName="exec-agent"
+                    Description="jkstack metrics agent"
+                    Start="auto"
+                    Account="LocalSystem"
+                    ErrorControl="normal"
+                    Arguments='-conf "[INSTALLDIR]conf\agent.conf"' />
+                  <ServiceControl
+                    Id="ServiceInstaller"
+                    Name="exec-agent"
+                    Remove="uninstall"
+                    Stop="uninstall"
+                    Wait="yes" />
+                </Component>
+              </Directory>
+
+              <Directory Id='conf' Name='conf'>
+                <Component Id='MainConfigure' Guid='ABCDDCBA-83F1-4F22-985B-FDB3C8ABD472'>
+                  <File Id='agent.conf' Name='agent.conf' DiskId='1' Source='$(var.RELEASE_DIR)/conf/agent.conf' KeyPath='yes'/>
+                </Component>
+              </Directory>
+            </Directory>
+
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id='Complete' Level='1'>
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='MainConfigure' />
+    </Feature>
+
+  </Product>
+</Wix>

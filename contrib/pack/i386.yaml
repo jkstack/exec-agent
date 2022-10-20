@@ -1,0 +1,17 @@
+name: exec-agent
+arch: i386
+platform: linux
+#version: 1.0.0
+maintainer: liwenchao <liwenchao@jkstack.com>
+description: jkstack metrics agent
+contents:
+  - src: $WORKDIR/opt/exec-agent/bin/exec-agent
+    dst: /opt/exec-agent/bin/exec-agent
+  - src: $WORKDIR/opt/exec-agent/conf/agent.conf
+    dst: /opt/exec-agent/conf/agent.conf
+    type: config|noreplace
+  - src: $WORKDIR/opt/exec-agent/.version
+    dst: /opt/exec-agent/.version
+scripts:
+  postinstall: contrib/pack/postinstall
+  preremove: contrib/pack/preremove

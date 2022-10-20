@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/exec-agent/bin/exec-agent -action install -conf /opt/exec-agent/conf/agent.conf
