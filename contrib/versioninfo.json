@@ -19,17 +19,17 @@
         "FileSubType": "00"
     },
     "StringFileInfo": {
-        "Comments": "jkstack smartagent",
+        "Comments": "jkstack exec agent",
         "CompanyName": "jkstack",
-        "FileDescription": "jkstack smartagent",
-        "FileVersion": "v1.0.0",
-        "InternalName": "smartagent",
+        "FileDescription": "jkstack exec agent",
+        "FileVersion": "#VERSION",
+        "InternalName": "exec-agent",
         "LegalCopyright": "Copyright (c) 2022 jkstack",
         "LegalTrademarks": "",
         "OriginalFilename": "main.go",
         "PrivateBuild": "",
-        "ProductName": "jkstack smartagent",
-        "ProductVersion": "v1.0.0",
+        "ProductName": "jkstack exec agent",
+        "ProductVersion": "#VERSION",
         "SpecialBuild": ""
     },
     "VarFileInfo": {
