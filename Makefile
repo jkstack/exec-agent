@@ -63,7 +63,6 @@ windows.386: prepare
 		-DBINDIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe \
 		-INPUTCHARSET UTF8 contrib/win.nsi
 	mv contrib/$(PROJ)_$(VERSION)_windows_386.exe $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_386.exe
-	rm -fr src
 msi.amd64: prepare
 	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
 		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe
@@ -82,7 +81,6 @@ msi.386: prepare
 		-o build.msi \
 		-v contrib/win.wxs
 	mv build.msi $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_386.msi
-	rm -fr src
 prepare:
 	rm -fr $(OUTDIR)/$(VERSION)/opt $(OUTDIR)/$(VERSION)/etc
 	mkdir -p $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin \
@@ -94,4 +92,4 @@ prepare:
 	sed -i "s|#PATCH|$(PATCH)|g" contrib/versioninfo.json
 	sed -i "s|#VERSION|v$(VERSION)|g" contrib/versioninfo.json
 distclean:
-	rm -fr $(OUTDIR) src
+	rm -fr $(OUTDIR)
