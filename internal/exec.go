@@ -24,9 +24,6 @@ func contain(cmd string, args []string, rm string) bool {
 }
 
 func (agent *Agent) Run(msg *anet.Msg) error {
-	if len(msg.Exec.DeferRM) > 0 && contain(msg.Exec.Cmd, msg.Exec.Args, msg.Exec.DeferRM) {
-		defer os.Remove(msg.Exec.DeferRM)
-	}
 	task := exec.NewTask(msg.TaskID)
 	err := task.Prepare(msg.Exec)
 	if err != nil {
@@ -54,6 +51,10 @@ func (agent *Agent) Run(msg *anet.Msg) error {
 		agent.Lock()
 		delete(agent.tasks, task.Pid())
 		agent.Unlock()
+
+		if len(msg.Exec.DeferRM) > 0 && contain(msg.Exec.Cmd, msg.Exec.Args, msg.Exec.DeferRM) {
+			os.Remove(msg.Exec.DeferRM)
+		}
 	}()
 	return nil
 }
