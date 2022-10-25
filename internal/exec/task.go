@@ -61,11 +61,7 @@ func (t *Task) Prepare(req *anet.ExecPayload) error {
 	if err != nil {
 		return err
 	}
-	cmd := t.cmd.Path
-	if len(t.cmd.Args) > 0 {
-		cmd += " " + strings.Join(t.cmd.Args, " ")
-	}
-	logging.Info("build command for task: %s\n  => %s", t.ID, cmd)
+	logging.Info("build command for task: %s\n  => %s", t.ID, t.cmd.String())
 	if len(req.WorkDir) > 0 {
 		t.cmd.Dir = req.WorkDir
 		logging.Info("set working directory to [%s] for task: %s", req.WorkDir, t.ID)

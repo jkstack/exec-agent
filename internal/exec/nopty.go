@@ -23,5 +23,5 @@ func createPty(cmd *exec.Cmd, stdin string) (io.ReadCloser, func(), error) {
 	return pr, func() {
 		pr.Close()
 		pw.Close()
-	}, cmd.Start()
+	}, nil
 }
