@@ -3,11 +3,25 @@ package internal
 import (
 	"context"
 	"exec/internal/exec"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/jkstack/anet"
 	"github.com/jkstack/jkframe/logging"
 )
+
+func contain(cmd string, args []string, rm string) bool {
+	if strings.Contains(cmd, rm) {
+		return true
+	}
+	for _, arg := range args {
+		if strings.Contains(arg, rm) {
+			return true
+		}
+	}
+	return false
+}
 
 func (agent *Agent) Run(msg *anet.Msg) error {
 	task := exec.NewTask(msg.TaskID)
@@ -37,6 +51,10 @@ func (agent *Agent) Run(msg *anet.Msg) error {
 		agent.Lock()
 		delete(agent.tasks, task.Pid())
 		agent.Unlock()
+
+		if len(msg.Exec.DeferRM) > 0 && contain(msg.Exec.Cmd, msg.Exec.Args, msg.Exec.DeferRM) {
+			os.Remove(msg.Exec.DeferRM)
+		}
 	}()
 	return nil
 }
