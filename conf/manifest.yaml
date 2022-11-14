@@ -1,0 +1,78 @@
+- key: id
+  name:
+    zh: AgentID
+  desc:
+    zh: Agent的ID，在当前服务器下的集群内唯一
+  default: example-agent
+
+- key: server
+  type: naddr
+  name:
+    zh: 服务端地址
+  desc:
+    zh: 连接服务器端的地址
+  default: 127.0.0.1:13081
+
+- key: log.target
+  type: csv
+  name:
+    zh: 日志输出目标
+  desc:
+    zh: 日志输出目标，目前仅支持stdout和file
+  default: stdout
+  csv_valid: [ stdout, file ]
+
+- key: log.dir
+  type: path
+  name:
+    zh: 日志文件路径
+  desc:
+    zh: 日志文件保存路径，仅当log.target中配置了file时有效
+  enabled:
+    when:
+      target: log.target
+      contain: file
+
+- key: log.size
+  type: bytes
+  name:
+    zh: 日志文件大小
+  desc:
+    zh: 日志文件滚动分割时的文件大小，仅当log.target中配置了file时有效
+  default: 10M
+  enabled:
+    when:
+      target: log.target
+      contain: file
+
+- key: log.rotate
+  type: uint
+  name:
+    zh: 日志文件份数
+  desc:
+    zh: 日志文件滚动分割时保留的份数，仅当log.target中配置了file时有效
+  default: 7
+  enabled:
+    when:
+      target: log.target
+      contain: file
+
+- key: monitor.enabled
+  type: bool
+  name:
+    zh: 是否启用监控
+  desc:
+    zh: 是否启用监控，agent会定时上报监控数据
+  default: true
+
+- key: monitor.interval
+  type: duration
+  name:
+    zh: 监控频率
+  desc:
+    zh: 监控数据上报频率
+  default: 10s
+  enabled:
+    when:
+      target: monitor.enabled
+      equal: true
