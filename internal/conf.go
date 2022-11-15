@@ -8,7 +8,9 @@ import (
 	"github.com/jkstack/libagent/conf"
 )
 
-type Configure conf.Configure
+type Configure struct {
+	Basic conf.Configure `kv:"basic"`
+}
 
 func load(dir string) *Configure {
 	f, err := os.Open(dir)
@@ -24,7 +26,7 @@ func (agent *Agent) ConfDir() string {
 }
 
 func (agent *Agent) Configure() *conf.Configure {
-	return (*conf.Configure)(agent.cfg)
+	return (*conf.Configure)(&agent.cfg.Basic)
 }
 
 func (agent *Agent) OnRewriteConfigure() error {

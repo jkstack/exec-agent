@@ -17,3 +17,8 @@
 
 1. 修正deb和rpm安装包中的epoch问题
 2. 增加manifest.yaml配置文件描述信息
+
+## 1.0.3
+
+1. 修改配置文件中的配置项，增加basic前缀
+2. 修正manifest.yaml中的id字段缺少类型的问题

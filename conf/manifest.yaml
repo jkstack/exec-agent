@@ -1,4 +1,5 @@
 - key: id
+  type: string
   name:
     zh: AgentID
   desc:
