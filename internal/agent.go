@@ -7,6 +7,8 @@ import (
 	"github.com/jkstack/anet"
 )
 
+var AgentName string
+
 type Agent struct {
 	sync.RWMutex
 	cfgDir  string
