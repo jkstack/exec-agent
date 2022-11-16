@@ -39,8 +39,6 @@ jobs:
 
       - name: Set up Go
         uses: actions/setup-go@v3
-        with:
-          go-version: ${{ matrix.go }}
 
       - name: Go Lint
         run: |
