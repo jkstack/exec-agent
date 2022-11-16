@@ -21,7 +21,7 @@
    - basic.server: 服务器端地址
 4. 使用以下命令启动客户端程序
 
-       /opt/exec-agent/bin/exec-agent -action start
+       /opt/exec-agent/bin/exec-agent start
 5. 检查当前客户端是否连接成功
 
        curl http://<服务端IP>:<端口号(默认13081)>/api/agents/<客户端ID>
