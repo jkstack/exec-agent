@@ -22,3 +22,4 @@
 
 1. 修改配置文件中的配置项，增加basic前缀
 2. 修正manifest.yaml中的id字段缺少类型的问题
+3. 修正manifest.yaml中的log.target字段默认值类型问题
