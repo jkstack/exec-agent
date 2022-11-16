@@ -37,7 +37,7 @@ func (agent *Agent) Upload(taskID string, msg *anet.Msg) (ret error) {
 		if len(msg.Upload.Data) > 0 {
 			err = file.WriteFile(dir, msg.Upload.Data)
 		} else if len(msg.Upload.URI) > 0 {
-			err = file.DownloadFrom(dir, agent.cfg.Server, msg.Upload.URI, msg.Upload.Token)
+			err = file.DownloadFrom(dir, agent.cfg.Basic.Server, msg.Upload.URI, msg.Upload.Token)
 		}
 		if err != nil {
 			logging.Error("save(%s): %v", dir, err)
