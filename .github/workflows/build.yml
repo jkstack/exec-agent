@@ -28,12 +28,26 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
 
-      - name: Lint
+      - name: Build
+        run: go build -v main.go
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Go Lint
         run: |
           go install golang.org/x/lint/golint@latest
           golint -set_exit_status code/...
           go install github.com/gordonklaus/ineffassign@latest
           ineffassign ./...
 
-      - name: Build
-        run: go build -v main.go
+      - name: Manifest Lint
+        uses: jkstack/manifest-lint@master
