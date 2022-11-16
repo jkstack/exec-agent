@@ -3,7 +3,7 @@
 OUTDIR=$(shell realpath release)
 
 PROJ=exec-agent
-VERSION=1.0.3
+VERSION=1.0.4
 TIMESTAMP=`date +%s`
 
 MAJOR=`echo $(VERSION)|cut -d'.' -f1`

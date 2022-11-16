@@ -2,17 +2,68 @@ package main
 
 import (
 	"exec/internal"
-	"flag"
 	"fmt"
-	"os"
-	"path/filepath"
 	rt "runtime"
 
 	"github.com/jkstack/jkframe/utils"
-	agent "github.com/jkstack/libagent"
+	"github.com/spf13/cobra"
 )
 
 const agentName = "exec-agent"
+
+var rootCmd = &cobra.Command{
+	Use:  "exec-agent",
+	Long: "jkstack exec agent",
+	Run:  internal.Run,
+}
+
+var installCmd = &cobra.Command{
+	Use:   "install",
+	Short: "register service",
+	Run:   internal.Install,
+}
+
+var uninstallCmd = &cobra.Command{
+	Use:   "uninstall",
+	Short: "unregister service",
+	Run:   internal.Uninstall,
+}
+
+var runCmd = &cobra.Command{
+	Use:   "run",
+	Short: "run program",
+	Run:   internal.Run,
+}
+
+var startCmd = &cobra.Command{
+	Use:   "start",
+	Short: "start service",
+	Run:   internal.Start,
+}
+
+var stopCmd = &cobra.Command{
+	Use:   "stop",
+	Short: "stop service",
+	Run:   internal.Stop,
+}
+
+var restartCmd = &cobra.Command{
+	Use:   "restart",
+	Short: "restart service",
+	Run:   internal.Restart,
+}
+
+var statusCmd = &cobra.Command{
+	Use:   "status",
+	Short: "show service status",
+	Run:   internal.Status,
+}
+
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "show version info",
+	Run:   showVersion,
+}
 
 var (
 	version      string = "0.0.0"
@@ -22,7 +73,7 @@ var (
 	buildTime    string = "0000-00-00 00:00:00"
 )
 
-func showVersion() {
+func showVersion(*cobra.Command, []string) {
 	fmt.Printf("version: %s\ncode version: %s.%s.%s\nbuild time: %s\ngo version: %s\n",
 		version,
 		gitBranch, gitHash, gitReversion,
@@ -31,64 +82,17 @@ func showVersion() {
 }
 
 func main() {
-	cf := flag.String("conf", "", "config file dir")
-	ver := flag.Bool("version", false, "show version info")
-	act := flag.String("action", "", "install, uninstall")
-	flag.Parse()
+	internal.AgentName = agentName
+	internal.Version = version
 
-	if *ver {
-		showVersion()
-		return
-	}
+	installCmd.Flags().StringVar(&internal.ConfDir, "conf", "", "configure file dir")
+	runCmd.Flags().StringVar(&internal.ConfDir, "conf", "", "configure file dir")
+	rootCmd.AddCommand(installCmd, uninstallCmd)
+	rootCmd.AddCommand(runCmd)
+	rootCmd.AddCommand(startCmd, stopCmd, restartCmd, statusCmd)
+	rootCmd.AddCommand(versionCmd)
 
-	switch *act {
-	case "install":
-		if len(*cf) == 0 {
-			fmt.Println("missing -conf argument")
-			os.Exit(1)
-		}
-
-		dir, err := filepath.Abs(*cf)
-		utils.Assert(err)
-
-		dummy := agent.NewDummyApp(agentName, dir)
-
-		err = agent.RegisterService(dummy)
-		if err != nil {
-			fmt.Printf("can not register service: %v\n", err)
-			return
-		}
-		fmt.Println("register service success")
-	case "uninstall":
-		err := agent.UnregisterService(agent.NewDummyApp(agentName, ""))
-		if err != nil {
-			fmt.Printf("can not unregister service: %v\n", err)
-			return
-		}
-		fmt.Println("unregister service success")
-	case "start":
-		err := agent.Start(agent.NewDummyApp(agentName, ""))
-		if err != nil {
-			fmt.Printf("can not start service: %v\n", err)
-			return
-		}
-		fmt.Println("start service success")
-	case "stop":
-		err := agent.Stop(agent.NewDummyApp(agentName, ""))
-		if err != nil {
-			fmt.Printf("can not stop service: %v\n", err)
-			return
-		}
-		fmt.Println("stop service success")
-	default:
-		if len(*cf) == 0 {
-			fmt.Println("missing -conf argument")
-			os.Exit(1)
-		}
-
-		dir, err := filepath.Abs(*cf)
-		utils.Assert(err)
-
-		agent.Run(internal.New(dir, version))
-	}
+	rootCmd.CompletionOptions.DisableDefaultCmd = true
+	rootCmd.Flags().StringVar(&internal.ConfDir, "conf", "", "configure file dir")
+	utils.Assert(rootCmd.Execute())
 }
