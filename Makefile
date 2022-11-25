@@ -3,7 +3,7 @@
 OUTDIR=$(shell realpath release)
 
 PROJ=exec-agent
-VERSION=1.0.5
+VERSION=1.0.6
 TIMESTAMP=`date +%s`
 
 MAJOR=`echo $(VERSION)|cut -d'.' -f1`
@@ -20,7 +20,7 @@ LDFLAGS="-X 'main.gitBranch=$(BRANCH)' \
 -X 'main.buildTime=$(BUILD_TIME)' \
 -X 'main.version=$(VERSION)'"
 
-all: distclean linux.amd64 linux.386 windows.amd64 windows.386 msi.amd64 msi.386
+all: distclean linux.amd64 linux.386 windows.amd64 windows.386
 	cp conf/manifest.yaml $(OUTDIR)/$(VERSION)/manifest.yaml
 	cp CHANGELOG.md $(OUTDIR)/CHANGELOG.md
 	rm -fr $(OUTDIR)/$(VERSION)/etc $(OUTDIR)/$(VERSION)/opt
@@ -64,24 +64,6 @@ windows.386: prepare
 		-DBINDIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe \
 		-INPUTCHARSET UTF8 contrib/win.nsi
 	mv contrib/$(PROJ)_$(VERSION)_windows_386.exe $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_386.exe
-msi.amd64: prepare
-	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
-		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe
-	unix2dos conf/agent.conf
-	wixl -D PRODUCT_VERSION=$(VERSION) \
-		-D RELEASE_DIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ) \
-		-o build.msi \
-		-v contrib/win.wxs
-	mv build.msi $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_amd64.msi
-msi.386: prepare
-	GOOS=windows GOARCH=386 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
-		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe main.go
-	unix2dos conf/agent.conf
-	wixl -D PRODUCT_VERSION=$(VERSION) \
-		-D RELEASE_DIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ) \
-		-o build.msi \
-		-v contrib/win.wxs
-	mv build.msi $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_386.msi
 prepare:
 	rm -fr $(OUTDIR)/$(VERSION)/opt $(OUTDIR)/$(VERSION)/etc
 	mkdir -p $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin \
