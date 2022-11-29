@@ -102,12 +102,12 @@ SectionEnd
 
 Function un.onUninstSuccess
   HideWindow
-  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name) 已成功从你的计算机移除。"
+  MessageBox MB_ICONINFORMATION|MB_OK "$(^Name) 已成功从你的计算机移除。" /SD IDOK
 FunctionEnd
 
 Function un.onInit
 !insertmacro MUI_UNGETLANGUAGE
-  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你要完全移除 $(^Name) ，及其所有组件？" IDYES +2
+  MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "你要完全移除 $(^Name) ，及其所有组件？" /SD IDYES IDYES +2
   Abort
 FunctionEnd
 
