@@ -39,3 +39,9 @@
 5. 检查当前客户端是否连接成功
 
        curl http://<服务端IP>:<端口号(默认13081)>/api/agents/<客户端ID>
+
+## 开源社区
+
+文档知识库：https://jkstack.github.io/
+
+<img src="docs/wechat_QR.jpg" height=200px width=200px />
