@@ -10,7 +10,7 @@ require (
 	github.com/goreleaser/nfpm/v2 v2.20.0
 	github.com/jkstack/anet v0.0.0-20221010100306-9a88844af68f
 	github.com/jkstack/jkframe v1.1.0
-	github.com/jkstack/libagent v1.1.7
+	github.com/jkstack/libagent v1.1.8
 	github.com/kardianos/service v1.2.1
 	github.com/shirou/gopsutil/v3 v3.22.10
 	github.com/spf13/cobra v1.6.0

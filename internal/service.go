@@ -28,7 +28,7 @@ func Install(*cobra.Command, []string) {
 	err = agent.RegisterService(dummy)
 	if err != nil {
 		fmt.Printf("can not register service: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	fmt.Println("register service success")
 }
@@ -37,7 +37,7 @@ func Uninstall(*cobra.Command, []string) {
 	err := agent.UnregisterService(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
 		fmt.Printf("can not unregister service: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	fmt.Println("unregister service success")
 }
@@ -46,7 +46,7 @@ func Start(*cobra.Command, []string) {
 	err := agent.Start(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
 		fmt.Printf("can not start service: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	fmt.Println("start service success")
 }
@@ -55,7 +55,7 @@ func Stop(*cobra.Command, []string) {
 	err := agent.Stop(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
 		fmt.Printf("can not stop service: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	fmt.Println("stop service success")
 }
@@ -64,7 +64,7 @@ func Restart(*cobra.Command, []string) {
 	err := agent.Restart(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
 		fmt.Printf("can not restart service: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	fmt.Println("restart service success")
 }
@@ -73,7 +73,7 @@ func Status(*cobra.Command, []string) {
 	status, err := agent.Status(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
 		fmt.Printf("can not get service status: %v\n", err)
-		return
+		os.Exit(1)
 	}
 	switch status {
 	case service.StatusRunning:
