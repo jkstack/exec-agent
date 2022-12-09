@@ -15,6 +15,7 @@ import (
 
 var cli http.Client
 
+// ReplaceDir replace dir from $$TMP$$ to temporary directory
 func ReplaceDir(dir string) string {
 	if dir == "$$TMP$$" {
 		return os.TempDir()
@@ -22,6 +23,7 @@ func ReplaceDir(dir string) string {
 	return dir
 }
 
+// WriteFile write data to file
 func WriteFile(dir, data string) error {
 	var dec []byte
 	if len(data) > 0 {
@@ -44,6 +46,7 @@ func WriteFile(dir, data string) error {
 	return nil
 }
 
+// DownloadFrom download file from uri
 func DownloadFrom(dir, server, uri, token string) error {
 	logging.Info("download file from uri %s token: %s", uri, token)
 	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("http://%s%s", server, uri), nil)
@@ -75,10 +78,12 @@ func DownloadFrom(dir, server, uri, token string) error {
 	return nil
 }
 
+// Chmod chmod
 func Chmod(dir string, mode os.FileMode) error {
 	return os.Chmod(dir, mode)
 }
 
+// Chown chown
 func Chown(dir, u, g string) error {
 	uid := -1
 	gid := -1

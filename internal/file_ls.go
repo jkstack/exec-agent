@@ -11,6 +11,7 @@ import (
 
 const blockSize = 32 * 1024
 
+// Ls handle ls command
 func (agent *Agent) Ls(taskID, dir string) error {
 	files, err := file.Ls(dir)
 	if err != nil {

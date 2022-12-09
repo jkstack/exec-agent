@@ -11,9 +11,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// ConfDir configure file dir
 var ConfDir string
+
+// Version agent version
 var Version string
 
+// Install register service
 func Install(*cobra.Command, []string) {
 	if len(ConfDir) == 0 {
 		fmt.Println("missing --conf argument")
@@ -33,6 +37,7 @@ func Install(*cobra.Command, []string) {
 	fmt.Println("register service success")
 }
 
+// Uninstall unregister service
 func Uninstall(*cobra.Command, []string) {
 	err := agent.UnregisterService(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
@@ -42,6 +47,7 @@ func Uninstall(*cobra.Command, []string) {
 	fmt.Println("unregister service success")
 }
 
+// Start start service
 func Start(*cobra.Command, []string) {
 	err := agent.Start(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
@@ -51,6 +57,7 @@ func Start(*cobra.Command, []string) {
 	fmt.Println("start service success")
 }
 
+// Stop stop service
 func Stop(*cobra.Command, []string) {
 	err := agent.Stop(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
@@ -60,6 +67,7 @@ func Stop(*cobra.Command, []string) {
 	fmt.Println("stop service success")
 }
 
+// Restart restart service
 func Restart(*cobra.Command, []string) {
 	err := agent.Restart(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
@@ -69,6 +77,7 @@ func Restart(*cobra.Command, []string) {
 	fmt.Println("restart service success")
 }
 
+// Status get service status
 func Status(*cobra.Command, []string) {
 	status, err := agent.Status(agent.NewDummyApp(AgentName, ""))
 	if err != nil {
@@ -85,6 +94,7 @@ func Status(*cobra.Command, []string) {
 	}
 }
 
+// Run run agent
 func Run(*cobra.Command, []string) {
 	if len(ConfDir) == 0 {
 		fmt.Println("missing --conf argument")

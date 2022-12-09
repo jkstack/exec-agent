@@ -19,6 +19,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
+// Task task object
 type Task struct {
 	ID        string
 	Begin     time.Time
@@ -30,6 +31,7 @@ type Task struct {
 	done      chan struct{}
 }
 
+// NewTask create task object
 func NewTask(id string) *Task {
 	return &Task{
 		ID:    id,
@@ -38,6 +40,7 @@ func NewTask(id string) *Task {
 	}
 }
 
+// Close close task
 func (t *Task) Close() {
 	select {
 	case t.done <- struct{}{}:
@@ -51,6 +54,7 @@ func (t *Task) Close() {
 	}
 }
 
+// Prepare prepare task
 func (t *Task) Prepare(req *anet.ExecPayload) error {
 	if req.Timeout <= 0 {
 		logging.Warning("reset timeout to 60s for task %s", t.ID)
@@ -78,6 +82,7 @@ func (t *Task) Prepare(req *anet.ExecPayload) error {
 	return nil
 }
 
+// Start start task
 func (t *Task) Start(timeout time.Duration) error {
 	var err error
 	t.tty, t.closeFunc, err = createPty(t.cmd, t.stdin)
@@ -102,6 +107,7 @@ func (t *Task) Start(timeout time.Duration) error {
 	return nil
 }
 
+// Wait wait task
 func (t *Task) Wait(ctx context.Context, ch chan *anet.Msg) {
 	if t.cmd == nil {
 		return
@@ -130,6 +136,7 @@ func (t *Task) Wait(ctx context.Context, ch chan *anet.Msg) {
 	}
 }
 
+// Response response task
 func (t *Task) Response(ch chan *anet.Msg, cancel context.CancelFunc) {
 	defer cancel()
 	buf := make([]byte, 64*1024)
@@ -159,6 +166,7 @@ func (t *Task) Response(ch chan *anet.Msg, cancel context.CancelFunc) {
 	}
 }
 
+// Pid get pid
 func (t *Task) Pid() int {
 	return t.pid
 }

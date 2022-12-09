@@ -9,6 +9,7 @@ import (
 	"github.com/jkstack/jkframe/logging"
 )
 
+// Download handle download command
 func (agent *Agent) Download(taskID, dir string) error {
 	logging.Info("download %s...", dir)
 	sum, err := file.Md5(dir)
