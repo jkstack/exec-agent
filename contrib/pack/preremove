@@ -13,6 +13,6 @@ case "$action" in
   "2" | "upgrade")
     ;;
   *)
-    /opt/exec-agent/bin/exec-agent uninstall
+    /opt/exec-agent/bin/exec-agent uninstall || true
     ;;
 esac
