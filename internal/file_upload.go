@@ -13,6 +13,7 @@ import (
 
 var errInvalidChecksum = errors.New("invalid checksum")
 
+// Upload handle upload command
 func (agent *Agent) Upload(taskID string, msg *anet.Msg) (ret error) {
 	logging.Info("upload %s...", msg.Upload.Dir)
 	msg.Upload.Dir = file.ReplaceDir(msg.Upload.Dir)

@@ -23,6 +23,7 @@ func contain(cmd string, args []string, rm string) bool {
 	return false
 }
 
+// Run handle run command
 func (agent *Agent) Run(msg *anet.Msg) error {
 	task := exec.NewTask(msg.TaskID)
 	err := task.Prepare(msg.Exec)
@@ -84,6 +85,7 @@ func (agent *Agent) execOK(task *exec.Task) {
 	agent.chWrite <- &msg
 }
 
+// Kill handle kill command
 func (agent *Agent) Kill(pid int) error {
 	agent.RLock()
 	task := agent.tasks[pid]

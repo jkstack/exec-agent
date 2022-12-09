@@ -14,6 +14,7 @@ func preNUm(data byte) int {
 	return i
 }
 
+// IsUtf8 check data is utf8 string
 func IsUtf8(data []byte) bool {
 	for i := 0; i < len(data); {
 		if data[i]&0x80 == 0x00 {

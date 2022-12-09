@@ -8,6 +8,7 @@ import (
 
 const blockSize = 32 * 1024
 
+// Md5 calculate file md5
 func Md5(dir string) ([md5.Size]byte, error) {
 	var sum [md5.Size]byte
 	f, err := os.Open(dir)
@@ -24,6 +25,7 @@ func Md5(dir string) ([md5.Size]byte, error) {
 	return sum, nil
 }
 
+// Size get file size
 func Size(dir string) (int64, error) {
 	fi, err := os.Stat(dir)
 	if err != nil {
@@ -32,6 +34,7 @@ func Size(dir string) (int64, error) {
 	return fi.Size(), nil
 }
 
+// Download handle download request
 func Download(dir string, fn func(uint64, []byte)) error {
 	f, err := os.Open(dir)
 	if err != nil {

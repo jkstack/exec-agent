@@ -4,6 +4,7 @@
     zh: AgentID
   desc:
     zh: Agent的ID，在当前服务器下的集群内唯一
+  required: true
   default: example-agent
 
 - key: basic.server
@@ -12,6 +13,7 @@
     zh: 服务端地址
   desc:
     zh: 连接服务器端的地址
+  required: true
   default: 127.0.0.1:13081
 
 - key: basic.log.target
@@ -20,6 +22,7 @@
     zh: 日志输出目标
   desc:
     zh: 日志输出目标，目前仅支持stdout和file
+  required: true
   default: [ stdout ]
   csv_valid: [ stdout, file ]
 
@@ -29,6 +32,7 @@
     zh: 日志文件路径
   desc:
     zh: 日志文件保存路径，仅当log.target中配置了file时有效
+  required: true
   enabled:
     when:
       target: basic.log.target
@@ -40,6 +44,7 @@
     zh: 日志文件大小
   desc:
     zh: 日志文件滚动分割时的文件大小，仅当log.target中配置了file时有效
+  required: true
   default: 10M
   enabled:
     when:
@@ -52,6 +57,7 @@
     zh: 日志文件份数
   desc:
     zh: 日志文件滚动分割时保留的份数，仅当log.target中配置了file时有效
+  required: true
   default: 7
   enabled:
     when:
@@ -64,6 +70,7 @@
     zh: 是否启用监控
   desc:
     zh: 是否启用监控，agent会定时上报监控数据
+  required: true
   default: true
 
 - key: basic.monitor.interval
@@ -72,6 +79,7 @@
     zh: 监控频率
   desc:
     zh: 监控数据上报频率
+  required: true
   default: 10s
   enabled:
     when:

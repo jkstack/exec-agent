@@ -37,6 +37,7 @@ func (i windowsFileInfo) Sys() interface{} {
 	return nil
 }
 
+// Ls handle ls command
 func Ls(dir string) ([]os.FileInfo, error) {
 	logging.Info("ls %s", dir)
 	if runtime.GOOS == "windows" && dir == "/" {
