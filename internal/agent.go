@@ -37,7 +37,7 @@ func (agent *Agent) AgentName() string {
 	return "exec-agent"
 }
 
-// Version geet agent version
+// Version get agent version
 func (agent *Agent) Version() string {
 	return agent.version
 }
