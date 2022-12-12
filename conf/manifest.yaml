@@ -1,5 +1,5 @@
 - key: basic.id
-  type: string
+  type: uuid
   name:
     zh: AgentID
   desc:
