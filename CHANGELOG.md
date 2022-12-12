@@ -50,3 +50,7 @@ windows下的exe安装包支持静默卸载
 
 1. manifest.yaml中增加required字段
 2. 修正golint问题
+
+## 1.0.10
+
+修改manifest.yaml中的basic.id字段类型为uuid
