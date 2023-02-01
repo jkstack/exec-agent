@@ -1,6 +1,6 @@
 # exec-agent
 
-[![exec-agent](https://github.com/jkstack/exec-agent/actions/workflows/build.yml/badge.svg)](https://github.com/jkstack/exec-agent/actions/workflows/build.yml)
+[![exec-agent](https://github.com/jkstack/exec-agent/actions/workflows/build_ci.yml/badge.svg)](https://github.com/jkstack/exec-agent/actions/workflows/build_ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/jkstack/exec-agent)](https://goreportcard.com/report/github.com/jkstack/exec-agent)
 [![go-mod](https://img.shields.io/github/go-mod/go-version/jkstack/exec-agent)](https://github.com/jkstack/exec-agent)
 [![license](https://img.shields.io/github/license/jkstack/exec-agent)](https://www.gnu.org/licenses/agpl-3.0.txt)
