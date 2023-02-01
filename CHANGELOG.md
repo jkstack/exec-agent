@@ -54,3 +54,8 @@ windows下的exe安装包支持静默卸载
 ## 1.0.10
 
 修改manifest.yaml中的basic.id字段类型为uuid
+
+## 1.1.0
+
+1. 支持arm架构
+2. go版本升级到1.19.5
