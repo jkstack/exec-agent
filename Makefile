@@ -20,7 +20,7 @@ LDFLAGS="-X 'main.gitBranch=$(BRANCH)' \
 -X 'main.buildTime=$(BUILD_TIME)' \
 -X 'main.version=$(VERSION)'"
 
-all: distclean linux.amd64 linux.386 windows.amd64 windows.386
+all: distclean linux.amd64 linux.386 linux.arm64 linux.arm windows.amd64 windows.386 windows.arm64 windows.arm
 	cp conf/manifest.yaml $(OUTDIR)/$(VERSION)/manifest.yaml
 	cp CHANGELOG.md $(OUTDIR)/CHANGELOG.md
 	rm -fr $(OUTDIR)/$(VERSION)/etc $(OUTDIR)/$(VERSION)/opt
@@ -46,6 +46,26 @@ linux.386: prepare
 		-name $(PROJ) -version $(VERSION) \
 		-workdir $(OUTDIR)/$(VERSION) \
 		-epoch $(REVERSION)
+linux.arm64: prepare
+	GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
+		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ) main.go
+	cd $(OUTDIR)/$(VERSION) && fakeroot tar -czvf $(PROJ)_$(VERSION)_linux_arm64.tar.gz \
+		--warning=no-file-changed opt
+	go run contrib/pack/release.go -o $(OUTDIR)/$(VERSION) \
+		-conf contrib/pack/arm64.yaml \
+		-name $(PROJ) -version $(VERSION) \
+		-workdir $(OUTDIR)/$(VERSION) \
+		-epoch $(REVERSION)
+linux.arm: prepare
+	GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
+		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ) main.go
+	cd $(OUTDIR)/$(VERSION) && fakeroot tar -czvf $(PROJ)_$(VERSION)_linux_arm.tar.gz \
+		--warning=no-file-changed opt
+	go run contrib/pack/release.go -o $(OUTDIR)/$(VERSION) \
+		-conf contrib/pack/arm.yaml \
+		-name $(PROJ) -version $(VERSION) \
+		-workdir $(OUTDIR)/$(VERSION) \
+		-epoch $(REVERSION)
 windows.amd64: prepare
 	GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
 		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe
@@ -64,6 +84,24 @@ windows.386: prepare
 		-DBINDIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe \
 		-INPUTCHARSET UTF8 contrib/win.nsi
 	mv contrib/$(PROJ)_$(VERSION)_windows_386.exe $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_386.exe
+windows.arm64: prepare
+	GOOS=windows GOARCH=arm64 CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
+		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe main.go
+	unix2dos conf/agent.conf
+	makensis -DARCH=arm64 \
+		-DPRODUCT_VERSION=$(VERSION) \
+		-DBINDIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe \
+		-INPUTCHARSET UTF8 contrib/win.nsi
+	mv contrib/$(PROJ)_$(VERSION)_windows_arm64.exe $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_arm64.exe
+windows.arm: prepare
+	GOOS=windows GOARCH=arm CGO_ENABLED=0 go build -ldflags $(LDFLAGS) \
+		-o $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe main.go
+	unix2dos conf/agent.conf
+	makensis -DARCH=arm \
+		-DPRODUCT_VERSION=$(VERSION) \
+		-DBINDIR=$(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin/$(PROJ).exe \
+		-INPUTCHARSET UTF8 contrib/win.nsi
+	mv contrib/$(PROJ)_$(VERSION)_windows_arm.exe $(OUTDIR)/$(VERSION)/$(PROJ)_$(VERSION)_windows_arm.exe
 prepare:
 	rm -fr $(OUTDIR)/$(VERSION)/opt $(OUTDIR)/$(VERSION)/etc
 	mkdir -p $(OUTDIR)/$(VERSION)/opt/$(PROJ)/bin \
