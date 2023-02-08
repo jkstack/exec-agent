@@ -112,5 +112,6 @@ prepare:
 	sed -i "s|#MINOR|$(MINOR)|g" contrib/versioninfo.json
 	sed -i "s|#PATCH|$(PATCH)|g" contrib/versioninfo.json
 	sed -i "s|#VERSION|v$(VERSION)|g" contrib/versioninfo.json
+	git config --global --add safe.directory `pwd`
 distclean:
 	rm -fr $(OUTDIR)
