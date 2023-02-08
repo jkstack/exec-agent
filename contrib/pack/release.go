@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"os/exec"
 	"path"
 	"strings"
 
@@ -43,6 +44,8 @@ func main() {
 		os.Exit(1)
 	}
 
+	fixSafeDir()
+
 	var info nfpm.Info
 	f, err := os.Open(*conf)
 	utils.Assert(err)
@@ -73,4 +76,13 @@ func main() {
 	utils.Assert(err)
 	defer rpmFile.Close()
 	utils.Assert(rpm.Package(&info, rpmFile))
+}
+
+func fixSafeDir() {
+	dir, err := os.Getwd()
+	utils.Assert(err)
+	cmd := exec.Command("git", "config", "--global", "--add", "safe.directory", dir)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	utils.Assert(cmd.Run())
 }
