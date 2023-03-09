@@ -105,8 +105,8 @@ github.com/jkstack/anet v0.0.0-20230207071751-5a225913e4b2 h1:3x4xZ9Ur9bu21wWJaA
 github.com/jkstack/anet v0.0.0-20230207071751-5a225913e4b2/go.mod h1:L9J4lHwDxTsCPX5MNaVa/0UG36JIiDWIJxlp3jmCQxQ=
 github.com/jkstack/jkframe v1.3.0 h1:BV9PTUMJ1fbqYoRjdDQFk2kp3akgFBczc30rxbMr7Qg=
 github.com/jkstack/jkframe v1.3.0/go.mod h1:9f/mU26CFA4eBx/Zp8EZtuZxTS+4zokiO7yhuMl2zTA=
-github.com/jkstack/libagent v1.2.0 h1:z4Fbmppza5U/9BicVM9zIEvp5xvlWK4CMBfIGWocfWY=
-github.com/jkstack/libagent v1.2.0/go.mod h1:24dKh1l7ixYP3YSs3oc33UWcX+QYUyVjW60mhuFhHAI=
+github.com/jkstack/libagent v1.2.1 h1:+0X4sSJaHpY9p3r4J4Rg2XcqQ0nXnrBeUxnDexGTGpI=
+github.com/jkstack/libagent v1.2.1/go.mod h1:24dKh1l7ixYP3YSs3oc33UWcX+QYUyVjW60mhuFhHAI=
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=
 github.com/kevinburke/ssh_config v1.2.0 h1:x584FjTGwHzMwvHx18PXxbBVzfnxogHaAReU4gf13a4=
 github.com/kevinburke/ssh_config v1.2.0/go.mod h1:CT57kijsi8u/K/BOFA39wgDQJ9CxiF4nAY/ojJ6r6mM=
