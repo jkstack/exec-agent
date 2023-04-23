@@ -75,3 +75,4 @@ windows下的exe安装包支持静默卸载
 
 1. 修正websocket连接断开问题
 2. 修正无法正常获取日志文件列表的问题
+3. 修改manifest.yaml日志输出目标默认值
