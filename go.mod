@@ -9,8 +9,8 @@ require (
 	github.com/dustin/go-humanize v1.0.1
 	github.com/goreleaser/nfpm/v2 v2.25.1
 	github.com/jkstack/anet v0.0.0-20230207071751-5a225913e4b2
-	github.com/jkstack/jkframe v1.3.0
-	github.com/jkstack/libagent v1.2.1
+	github.com/jkstack/jkframe v1.4.4
+	github.com/jkstack/libagent v1.2.2
 	github.com/kardianos/service v1.2.1
 	github.com/shirou/gopsutil/v3 v3.23.1
 	github.com/spf13/cobra v1.6.1
