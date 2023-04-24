@@ -23,7 +23,7 @@
   desc:
     zh: 日志输出目标，目前仅支持stdout和file
   required: true
-  default: [ stdout ]
+  default: [ stdout, file ]
   csv_valid: [ stdout, file ]
 
 - key: basic.log.dir
