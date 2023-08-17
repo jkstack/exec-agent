@@ -41,3 +41,7 @@ func (agent *Agent) AgentName() string {
 func (agent *Agent) Version() string {
 	return agent.version
 }
+
+// OnStop stop signal
+func (agent *Agent) OnStop() {
+}

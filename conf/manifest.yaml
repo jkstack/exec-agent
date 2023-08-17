@@ -81,6 +81,7 @@
     zh: 监控数据上报频率
   required: true
   default: 10s
+  min: 5s
   enabled:
     when:
       target: basic.monitor.enabled
